@@ -1,0 +1,17 @@
+server:
+  port: 9090
+
+langchain4j:
+  gigachat:
+    chat-model:
+      temperature: 0
+      auth:
+        type: OAUH
+        auth-key: Njk5OGM4NjktZTYxYi00ZWZlLWE5NDgtZjk5NGQxZDg2MDIzOjJmMzI2M2ExLTBiYTQtNDUwZC1hOWM5LWRmZDE2ZTYxYzRhZg==
+        scope: GIGACHAT_API_PERS
+      log-requests: 'true'
+      model-name: GigaChat-Max
+
+logging:
+  level:
+    dev.langchain4j: DEBUG
