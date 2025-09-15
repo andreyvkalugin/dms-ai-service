@@ -1,17 +1,19 @@
-package ru.kalugin.ai.a2
+package ru.kalugin.ai.usecase.agent
 
 import org.bsc.langgraph4j.state.AgentState
 import org.bsc.langgraph4j.state.Channel
 import org.bsc.langgraph4j.state.Channels
 import kotlin.jvm.optionals.getOrDefault
 
+class AgentStateSupport(initData: Map<String, Any>) : AgentState(initData) {
 
-//internal class State(initData: Map<String?, Any?>?) : MessagesState<ChatMessage?>(initData)
+    val lastMessage: Any
+        get() = messages().last()
 
-class SimpleState(initData: Map<String?, Any?>?) : AgentState(initData) {
+    val initState: Any
+        get() = messages().first()
 
-    fun messages() = this.value<List<String>>(MESSAGES_KEY).getOrDefault(emptyList())
-
+    private fun messages(): List<Any> = this.value<List<Any>>(MESSAGES_KEY).getOrDefault(emptyList())
 
     companion object {
         const val MESSAGES_KEY = "messages"

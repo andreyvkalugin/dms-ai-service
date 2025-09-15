@@ -1,25 +1,24 @@
-package ru.kalugin.ai.assistent
+package ru.kalugin.ai.usecase
 
 import dev.langchain4j.model.chat.listener.ChatModelErrorContext
 import dev.langchain4j.model.chat.listener.ChatModelListener
 import dev.langchain4j.model.chat.listener.ChatModelRequestContext
 import dev.langchain4j.model.chat.listener.ChatModelResponseContext
-import org.slf4j.LoggerFactory
+import mu.KotlinLogging
 
 
-class MyChatModelListener : ChatModelListener {
+class ModelListener : ChatModelListener {
     override fun onRequest(requestContext: ChatModelRequestContext) {
-        log.info("onRequest(): {}", requestContext.chatRequest())
+        log.info { "chat model onRequest(): [ ${requestContext.chatRequest()} ]" }
     }
 
     override fun onResponse(responseContext: ChatModelResponseContext) {
-        log.info("onResponse(): {}", responseContext.chatResponse())
+        log.info { "chat model onResponse(): ${responseContext.chatResponse()}" }
     }
 
     override fun onError(errorContext: ChatModelErrorContext) {
-        log.info("onError(): {}", errorContext.error().message)
+        log.info { "chat model onError(): ${errorContext.error().message}" }
     }
-
 }
 
-val log = LoggerFactory.getLogger(MyChatModelListener::class.java)
+private val log = KotlinLogging.logger {}

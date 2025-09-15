@@ -17,19 +17,19 @@ class JacksonConfig {
     @Primary
     fun provideCustomizer() = Jackson2ObjectMapperBuilderCustomizer {
         it.modules(
-                JavaTimeModule(),
-                kotlinModule()
-        ).featuresToDisable(
-                SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
-                DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
-        )
-    }
-
-    @Bean
-    @Primary
-    fun getMapper() = jacksonObjectMapper().registerModules(
             JavaTimeModule(),
             kotlinModule()
-    ).disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        ).featuresToDisable(
+            SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
+            DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
+        )
+    }
 }
+
+val mapper = jacksonObjectMapper()
+    .registerModules(
+        JavaTimeModule(),
+        kotlinModule()
+    )
+    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+    .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)

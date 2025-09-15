@@ -1,4 +1,4 @@
-package ru.kalugin.ai.assistent
+package ru.kalugin.ai.usecase.assistant
 
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage
@@ -6,10 +6,10 @@ import dev.langchain4j.service.V
 import dev.langchain4j.service.spring.AiService;
 
 @AiService
-interface SchemaAssistent {
+interface SchemaAssistant {
 
     @SystemMessage(
-            """
+        """
                 <Роль>
                 Ты эксперт по созданию схем JSON Schema. 
                 Получив образец данных в формате JSON, твоя задача — разработать точную и полную схему, 
@@ -33,7 +33,6 @@ interface SchemaAssistent {
                 либо отсутствия некоторых свойств.
                 Требования:
                 - Все обязательные свойства обязательно присутствуют.
-                - Свойства ShortValue, SortOrder и ValueUCPID допускают отсутствие значения (считаются nullable).
                 - Соблюсти соответствие стандартам JSON Schema Draft-07.
                 </Инструкции>
                 
@@ -44,10 +43,5 @@ interface SchemaAssistent {
             """
     )
     @UserMessage("В качестве входных данных используй следующий JSON: {{document}}")
-    fun chat(@V("document")document: String): String
-    //fun chat(): List<ru.kalugin.ai.assistent.Model>
+    fun createSchema(@V("document") document: String): String
 }
-
-//             <Пользовательский_ввод>В ответ напиши: \"Введите исходные данные\",
-//                 затем дождитесь, пока пользователь предоставит требуемую информацию.
-//                 </Пользовательский_вод>
