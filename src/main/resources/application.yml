@@ -3,6 +3,14 @@ server:
 
 langchain4j:
   gigachat:
+    embedding-model:
+      log-requests: 'true'
+      log-responses: 'true'
+      auth:
+        type: OAUH
+        auth-key: Njk5OGM4NjktZTYxYi00ZWZlLWE5NDgtZjk5NGQxZDg2MDIzOjJmMzI2M2ExLTBiYTQtNDUwZC1hOWM5LWRmZDE2ZTYxYzRhZg==
+        scope: GIGACHAT_API_PERS
+      model-name: Embeddings
     chat-model:
       temperature: 0
       auth:
